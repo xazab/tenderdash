@@ -42,13 +42,12 @@ func DefaultBlockParams() tmproto.BlockParams {
 	}
 }
 
-// DefaultEvidenceParams returns a default EvidenceParams.
+// DefaultEvidenceParams Params returns a default EvidenceParams.
 func DefaultEvidenceParams() tmproto.EvidenceParams {
 	return tmproto.EvidenceParams{
-		MaxAgeNumBlocks:  100000, // 27.8 hrs at 1block/s
-		MaxAgeDuration:   48 * time.Hour,
-		MaxNum:           50,
-		ProofTrialPeriod: 50000, // half MaxAgeNumBlocks
+		MaxAgeNumBlocks: 100000, // 27.8 hrs at 1block/s
+		MaxAgeDuration:  48 * time.Hour,
+		MaxNum:          50,
 	}
 }
 
@@ -109,16 +108,6 @@ func ValidateConsensusParams(params tmproto.ConsensusParams) error {
 	if int64(params.Evidence.MaxNum)*MaxEvidenceBytes > params.Block.MaxBytes {
 		return fmt.Errorf("total possible evidence size is bigger than block.MaxBytes, %d > %d",
 			int64(params.Evidence.MaxNum)*MaxEvidenceBytes, params.Block.MaxBytes)
-	}
-
-	if params.Evidence.ProofTrialPeriod <= 0 {
-		return fmt.Errorf("evidenceParams.ProofTrialPeriod must be grater than 0 if provided, Got %v",
-			params.Evidence.ProofTrialPeriod)
-	}
-
-	if params.Evidence.ProofTrialPeriod >= params.Evidence.MaxAgeNumBlocks {
-		return fmt.Errorf("evidenceParams.ProofTrialPeriod must be smaller than evidenceParams.MaxAgeNumBlocks,  %d > %d",
-			params.Evidence.ProofTrialPeriod, params.Evidence.MaxAgeDuration)
 	}
 
 	if len(params.Validator.PubKeyTypes) == 0 {
