@@ -6,6 +6,7 @@ import (
 	"time"
 
 	abci "github.com/tendermint/tendermint/abci/types"
+	"github.com/tendermint/tendermint/crypto/ed25519"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 )
@@ -57,7 +58,7 @@ func DefaultEvidenceParams() tmproto.EvidenceParams {
 // only ed25519 pubkeys.
 func DefaultValidatorParams() tmproto.ValidatorParams {
 	return tmproto.ValidatorParams{
-		PubKeyTypes: []string{ABCIPubKeyTypeEd25519},
+		PubKeyTypes: []string{ed25519.KeyType},
 	}
 }
 

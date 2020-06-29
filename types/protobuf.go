@@ -23,10 +23,6 @@ const (
 	ABCIEvidenceTypeMock             = "mock/evidence"
 )
 
-const (
-	ABCIPubKeyTypeEd25519 = "ed25519"
-)
-
 // TODO: Make non-global by allowing for registration of more pubkey types
 
 var ABCIPubKeyTypesToNames = map[string]string{
