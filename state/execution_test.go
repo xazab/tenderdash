@@ -179,7 +179,7 @@ func TestValidateValidatorUpdates(t *testing.T) {
 	pk2, err := cryptoenc.PubKeyToProto(pubkey2)
 	assert.NoError(t, err)
 
-	defaultValidatorParams := tmproto.ValidatorParams{PubKeyTypes: []string{types.ABCIPubKeyTypeEd25519}}
+	defaultValidatorParams := tmproto.ValidatorParams{PubKeyTypes: []string{ed25519.KeyType}}
 
 	testCases := []struct {
 		name string

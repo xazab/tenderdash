@@ -9,11 +9,12 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	abci "github.com/tendermint/tendermint/abci/types"
+	"github.com/tendermint/tendermint/crypto/ed25519"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 )
 
 var (
-	valEd25519 = []string{ABCIPubKeyTypeEd25519}
+	valEd25519 = []string{ed25519.KeyType}
 )
 
 func TestConsensusParamsValidation(t *testing.T) {

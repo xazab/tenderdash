@@ -15,7 +15,7 @@ import (
 
 func TestABCIPubKey(t *testing.T) {
 	pkEd := ed25519.GenPrivKey().PubKey()
-	err := testABCIPubKey(t, pkEd, ABCIPubKeyTypeEd25519)
+	err := testABCIPubKey(t, pkEd, ed25519.KeyType)
 	assert.NoError(t, err)
 }
 
