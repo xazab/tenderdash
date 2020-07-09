@@ -178,13 +178,13 @@ func (b *Block) HashesTo(hash []byte) bool {
 }
 
 // Size returns size of the block in bytes.
-func (b *Block) Size() int {
+func (b *Block) Size() uint64 {
 	pbb, err := b.ToProto()
 	if err != nil {
 		return 0
 	}
 
-	return pbb.Size()
+	return uint64(pbb.Size())
 }
 
 // String returns a string representation of the block

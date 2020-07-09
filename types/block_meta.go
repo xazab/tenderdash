@@ -11,9 +11,9 @@ import (
 // BlockMeta contains meta information.
 type BlockMeta struct {
 	BlockID   BlockID `json:"block_id"`
-	BlockSize int     `json:"block_size"`
+	BlockSize uint64  `json:"block_size"`
 	Header    Header  `json:"header"`
-	NumTxs    int     `json:"num_txs"`
+	NumTxs    uint64  `json:"num_txs"`
 }
 
 // NewBlockMeta returns a new BlockMeta.
@@ -22,7 +22,7 @@ func NewBlockMeta(block *Block, blockParts *PartSet) *BlockMeta {
 		BlockID:   BlockID{block.Hash(), blockParts.Header()},
 		BlockSize: block.Size(),
 		Header:    block.Header,
-		NumTxs:    len(block.Data.Txs),
+		NumTxs:    uint64(len(block.Data.Txs)),
 	}
 }
 
@@ -33,9 +33,9 @@ func (bm *BlockMeta) ToProto() *tmproto.BlockMeta {
 
 	pb := &tmproto.BlockMeta{
 		BlockID:   bm.BlockID.ToProto(),
-		BlockSize: int64(bm.BlockSize),
+		BlockSize: bm.BlockSize,
 		Header:    *bm.Header.ToProto(),
-		NumTxs:    int64(bm.NumTxs),
+		NumTxs:    bm.NumTxs,
 	}
 	return pb
 }
@@ -58,9 +58,9 @@ func BlockMetaFromProto(pb *tmproto.BlockMeta) (*BlockMeta, error) {
 	}
 
 	bm.BlockID = *bi
-	bm.BlockSize = int(pb.BlockSize)
+	bm.BlockSize = pb.BlockSize
 	bm.Header = h
-	bm.NumTxs = int(pb.NumTxs)
+	bm.NumTxs = pb.NumTxs
 
 	return bm, bm.ValidateBasic()
 }
