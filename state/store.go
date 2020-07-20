@@ -82,6 +82,7 @@ func loadState(db dbm.DB, key []byte) (state State) {
 	if err != nil {
 		panic(err)
 	}
+
 	if len(buf) == 0 {
 		return state
 	}
@@ -440,11 +441,13 @@ func saveValidatorsInfo(db dbm.DB, height, lastHeightChanged int64, valSet *type
 	// Only persist validator set if it was updated or checkpoint height (see
 	// valSetCheckpointInterval) is reached.
 	if height == lastHeightChanged || height%valSetCheckpointInterval == 0 {
-		pv, err := valSet.ToProto()
-		if err != nil {
-			panic(err)
+		if !valSet.IsNilOrEmpty() {
+			pv, err := valSet.ToProto()
+			if err != nil {
+				panic(err)
+			}
+			valInfo.ValidatorSet = pv
 		}
-		valInfo.ValidatorSet = pv
 	}
 
 	bz, err := valInfo.Marshal()

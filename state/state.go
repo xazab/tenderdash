@@ -143,17 +143,21 @@ func (state *State) ToProto() (*tmstate.State, error) {
 
 	sm.LastBlockID = state.LastBlockID.ToProto()
 	sm.LastBlockTime = state.LastBlockTime
-	vals, err := state.Validators.ToProto()
-	if err != nil {
-		return nil, err
+	if !state.Validators.IsNilOrEmpty() {
+		vals, err := state.Validators.ToProto()
+		if err != nil {
+			return nil, err
+		}
+		sm.Validators = vals
 	}
-	sm.Validators = vals
 
-	nVals, err := state.NextValidators.ToProto()
-	if err != nil {
-		return nil, err
+	if !state.Validators.IsNilOrEmpty() {
+		nVals, err := state.NextValidators.ToProto()
+		if err != nil {
+			return nil, err
+		}
+		sm.NextValidators = nVals
 	}
-	sm.NextValidators = nVals
 
 	if state.LastBlockHeight >= 1 { // At Block 1 LastValidators is nil
 		lVals, err := state.LastValidators.ToProto()
