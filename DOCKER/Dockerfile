@@ -4,27 +4,27 @@ RUN apk update && \
     apk upgrade && \
     apk add bash git gmp-dev sudo cmake build-base
 
-COPY . /go/src/github.com/dashevo/tenderdash
+COPY . /go/src/github.com/xazab/tenderxazab
 
-WORKDIR /go/src/github.com/dashevo/tenderdash
+WORKDIR /go/src/github.com/xazab/tenderxazab
 
 RUN make install-bls
 RUN make build-linux
 
 FROM alpine:3.9
-LABEL maintainer="developers@dash.org"
+LABEL maintainer="developers@xazab.xyz"
 
-# Tenderdash will be looking for the genesis file in /tenderdash/config/genesis.json
+# Tenderxazab will be looking for the genesis file in /tenderxazab/config/genesis.json
 # (unless you change `genesis_file` in config.toml). You can put your config.toml and
-# private validator file into /tenderdash/config.
+# private validator file into /tenderxazab/config.
 #
-# The /tenderdash/data dir is used by tenderdash to store state.
-ENV TMHOME /tenderdash
+# The /tenderxazab/data dir is used by tenderxazab to store state.
+ENV TMHOME /tenderxazab
 
 # OS environment setup
 # Set user right away for determinism, create directory for persistence and give our user ownership
 # jq and curl used for extracting `pub_key` from private validator while
-# deploying tenderdash with Kubernetes. It is nice to have bash so the users
+# deploying tenderxazab with Kubernetes. It is nice to have bash so the users
 # could execute bash commands.
 RUN apk update && \
     apk upgrade && \
@@ -42,11 +42,11 @@ EXPOSE 26656 26657 26660
 
 STOPSIGNAL SIGTERM
 
-COPY --from=build /go/src/github.com/dashevo/tenderdash/build/tenderdash /usr/bin/tenderdash
+COPY --from=build /go/src/github.com/xazab/tenderxazab/build/tenderxazab /usr/bin/tenderxazab
 
 # You can overwrite these before the first run to influence
 # config.json and genesis.json. Additionally, you can override
-# CMD to add parameters to `tenderdash node`.
+# CMD to add parameters to `tenderxazab node`.
 ENV PROXY_APP=kvstore MONIKER=dockernode CHAIN_ID=dockerchain
 
 COPY ./DOCKER/docker-entrypoint.sh /usr/local/bin/

@@ -1,3 +1,3 @@
-killall tenderdash
+killall tenderxazab
 killall abci-cli
-rm -rf ~/.tenderdash_app
+rm -rf ~/.tenderxazab_app

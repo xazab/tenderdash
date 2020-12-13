@@ -18,7 +18,7 @@ test_cover:
 
 test_apps:
 	# run the app tests using bash
-	# requires `abci-cli` and `tenderdash` binaries installed
+	# requires `abci-cli` and `tenderxazab` binaries installed
 	bash test/app/test.sh
 .PHONY: test_apps
 

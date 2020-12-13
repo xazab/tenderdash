@@ -3,56 +3,56 @@ version: '3'
 services:
   node0:
     container_name: node0
-    image: "dashpay/tenderdash:localnode"
+    image: "xazab/tenderxazab:localnode"
     ports:
       - "26656-26657:26656-26657"
     environment:
       - ID=0
-      - LOG=${LOG:-tenderdash.log}
+      - LOG=${LOG:-tenderxazab.log}
     volumes:
-      - ./build:/tenderdash:Z
+      - ./build:/tenderxazab:Z
     networks:
       localnet:
         ipv4_address: 192.167.10.2
 
   node1:
     container_name: node1
-    image: "dashpay/tenderdash:localnode"
+    image: "xazab/tenderxazab:localnode"
     ports:
       - "26659-26660:26656-26657"
     environment:
       - ID=1
-      - LOG=${LOG:-tenderdash.log}
+      - LOG=${LOG:-tenderxazab.log}
     volumes:
-      - ./build:/tenderdash:Z
+      - ./build:/tenderxazab:Z
     networks:
       localnet:
         ipv4_address: 192.167.10.3
 
   node2:
     container_name: node2
-    image: "dashpay/tenderdash:localnode"
+    image: "xazab/tenderxazab:localnode"
     environment:
       - ID=2
-      - LOG=${LOG:-tenderdash.log}
+      - LOG=${LOG:-tenderxazab.log}
     ports:
       - "26661-26662:26656-26657"
     volumes:
-      - ./build:/tenderdash:Z
+      - ./build:/tenderxazab:Z
     networks:
       localnet:
         ipv4_address: 192.167.10.4
 
   node3:
     container_name: node3
-    image: "dashpay/tenderdash:localnode"
+    image: "xazab/tenderxazab:localnode"
     environment:
       - ID=3
-      - LOG=${LOG:-tenderdash.log}
+      - LOG=${LOG:-tenderxazab.log}
     ports:
       - "26663-26664:26656-26657"
     volumes:
-      - ./build:/tenderdash:Z
+      - ./build:/tenderxazab:Z
     networks:
       localnet:
         ipv4_address: 192.167.10.5

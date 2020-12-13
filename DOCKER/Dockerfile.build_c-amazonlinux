@@ -21,7 +21,7 @@ ENV PATH=$PATH:/usr/local/go/bin:/go/bin
 ENV GOBIN=/go/bin
 ENV GOPATH=/go/src
 
-RUN mkdir -p /tenderdash
-WORKDIR /tenderdash
+RUN mkdir -p /tenderxazab
+WORKDIR /tenderxazab
 
 CMD ["/usr/bin/make", "build", "TENDERMINT_BUILD_OPTIONS=cleveldb"]

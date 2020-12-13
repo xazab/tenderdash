@@ -1,7 +1,7 @@
 # Makefile for the "localnode" docker image.
 
 all:
-	docker build --tag dashpay/tenderdash:localnode localnode
+	docker build --tag xazab/tenderxazab:localnode localnode
 
 .PHONY: all
 

@@ -21,7 +21,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=dashpay/tenderdash
+          DOCKER_IMAGE=xazab/tenderxazab
           VERSION=noop
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}

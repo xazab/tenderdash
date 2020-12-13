@@ -1,8 +1,8 @@
 PACKAGES=$(shell go list ./...)
-OUTPUT?=build/tenderdash
+OUTPUT?=build/tenderxazab
 
-REPO_NAME=github.com/dashevo/tenderdash
-BUILD_TAGS?=tenderdash
+REPO_NAME=github.com/xazab/tenderxazab
+BUILD_TAGS?=tenderxazab
 VERSION := $(shell git describe --always)
 LD_FLAGS = -X ${REPO_NAME}/version.TMCoreSemVer=$(VERSION)
 BUILD_FLAGS = -mod=readonly -ldflags "$(LD_FLAGS)"
@@ -74,11 +74,11 @@ install-bls: build-bls
 ###############################################################################
 
 build:
-	CGO_ENABLED=$(CGO_ENABLED) go build $(BUILD_FLAGS) -tags '$(BUILD_TAGS)' -o $(OUTPUT) ./cmd/tenderdash/
+	CGO_ENABLED=$(CGO_ENABLED) go build $(BUILD_FLAGS) -tags '$(BUILD_TAGS)' -o $(OUTPUT) ./cmd/tenderxazab/
 .PHONY: build
 
 install:
-	CGO_ENABLED=$(CGO_ENABLED) go install $(BUILD_FLAGS) -tags $(BUILD_TAGS) ./cmd/tenderdash
+	CGO_ENABLED=$(CGO_ENABLED) go install $(BUILD_FLAGS) -tags $(BUILD_TAGS) ./cmd/tenderxazab
 .PHONY: install
 
 ###############################################################################
@@ -227,7 +227,7 @@ sync-docs:
 ###############################################################################
 
 build-docker:
-	docker build --label=tenderdash --tag="dashpay/tenderdash" --file DOCKER/Dockerfile .
+	docker build --label=tenderxazab --tag="xazab/tenderxazab" --file DOCKER/Dockerfile .
 .PHONY: build-docker
 
 ###############################################################################
@@ -248,12 +248,12 @@ build-docker-localnode:
 # Linux-compatible binary. Produces a compatible binary at ./build/tendermint
 build_c-amazonlinux:
 	$(MAKE) -C ./DOCKER build_amazonlinux_buildimage
-	docker run --rm -it -v `pwd`:/tendermint dashpay/tenderdash:build_c-amazonlinux
+	docker run --rm -it -v `pwd`:/tendermint xazab/tenderxazab:build_c-amazonlinux
 .PHONY: build_c-amazonlinux
 
 # Run a 4-node testnet locally
 localnet-start: localnet-stop build-docker-localnode
-	@if ! [ -f build/node0/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/tendermint:Z dashpay/tenderdash testnet --config /etc/tendermint/config-template.toml --o . --starting-ip-address 192.167.10.2; fi
+	@if ! [ -f build/node0/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/tendermint:Z xazab/tenderxazab testnet --config /etc/tendermint/config-template.toml --o . --starting-ip-address 192.167.10.2; fi
 	docker-compose up
 .PHONY: localnet-start
 

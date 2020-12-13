@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	cmd "github.com/tendermint/tendermint/cmd/tenderdash/commands"
-	"github.com/tendermint/tendermint/cmd/tenderdash/commands/debug"
+	cmd "github.com/tendermint/tendermint/cmd/tenderxazab/commands"
+	"github.com/tendermint/tendermint/cmd/tenderxazab/commands/debug"
 	cfg "github.com/tendermint/tendermint/config"
 	"github.com/tendermint/tendermint/libs/cli"
 	nm "github.com/tendermint/tendermint/node"

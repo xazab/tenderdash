@@ -1,9 +1,9 @@
 .PHONY: build install docker-image
 
 TENDERMINT_VERSION?=latest
-BUILD_TAGS?='tenderdash'
+BUILD_TAGS?='tenderxazab'
 VERSION := $(shell git describe --always)
-BUILD_FLAGS = -ldflags "-X github.com/dashevo/tenderdash/version.TMCoreSemVer=$(VERSION)
+BUILD_FLAGS = -ldflags "-X github.com/xazab/tenderxazab/version.TMCoreSemVer=$(VERSION)
 
 .DEFAULT_GOAL := build
 

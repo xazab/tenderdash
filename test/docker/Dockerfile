@@ -6,7 +6,7 @@ RUN apt-get update && \
   jq bsdmainutils vim-common psmisc netcat curl sudo cmake libgmp-dev
 
 # Setup tendermint repo
-ENV REPO $GOPATH/src/github.com/dashevo/tenderdash
+ENV REPO $GOPATH/src/github.com/xazab/tenderxazab
 ENV GOBIN $GOPATH/bin
 WORKDIR $REPO
 
@@ -24,7 +24,7 @@ RUN make install-bls install_abci
 # install Tendermint
 RUN make install
 
-RUN tenderdash testnet \
+RUN tenderxazab testnet \
   --config $REPO/test/docker/config-template.toml \
   --node-dir-prefix="mach" \
   --v=4 \

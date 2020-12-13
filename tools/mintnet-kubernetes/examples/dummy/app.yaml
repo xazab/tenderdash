@@ -63,7 +63,7 @@ spec:
       annotations:
         pod.beta.kubernetes.io/init-containers: '[{
           "name": "tm-gen-validator",
-          "image": "dashpay/tenderdash:0.10.0",
+          "image": "xazab/tenderxazab:0.10.0",
           "imagePullPolicy": "IfNotPresent",
           "command": ["bash", "-c", "
             set -ex\n
@@ -81,7 +81,7 @@ spec:
       containers:
       - name: tm
         imagePullPolicy: IfNotPresent
-        image: dashpay/tenderdash:0.10.0
+        image: xazab/tenderxazab:0.10.0
         ports:
         - containerPort: 26656
           name: p2p
